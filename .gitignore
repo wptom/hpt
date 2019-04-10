@@ -1,0 +1,14 @@
+.DS_Store
+.vscode/
+node_modules
+styles.css
+/app/*.html
+/output*
+_ui/
+medias/
+
+*.log
+npm-debug.log*
+docker-compose.yml
+gulp_config-original.json
+/Docker/*
