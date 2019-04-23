@@ -1,0 +1,103 @@
+@import "colors.less";
+
+.custom-switch {
+    position: relative; 
+	width: 100%;
+    -webkit-user-select:none; 
+	-moz-user-select:none; 
+    -ms-user-select: none;
+    cursor: pointer;
+	
+	&__checkbox {
+		display: none;
+	}
+	
+	&__label {
+		display: block; 
+		overflow: hidden; 
+		cursor: pointer;
+		border-radius: 20px;
+	}
+	
+	&__inner {
+		display: block; 
+		width: 200%; 
+		margin-left: -100%;
+    	transition: margin 0.3s ease-in 0s;
+		
+		&:before,
+		&:after {
+			display: block; 
+			float: left; 
+			width: 50%; 
+			height: 30px; 
+			padding: 0; 
+			line-height: 30px;
+    		font-size: 12px; 
+			font-family: 'Open Sans', sans-serif ; 
+    		box-sizing: border-box;
+			color: @color-white;
+		}
+		
+		&:before {
+			content: "Souhlasím";
+			padding-left: 15px;
+			background-color: @color-success;
+		}
+		
+		&:after {
+			content: "Nesouhlasím";
+			padding-right: 15px;
+			background-color: @color-error;
+			text-align: right;
+		}
+	}
+	
+	&__switch {
+		font-family: "Font Awesome 5 Free";
+		display: block; 
+		width: 24px;
+		height: 24px;
+		margin: 3px;
+		background: @color-white;
+		position: absolute; 
+		top: 0; 
+		bottom: 0;
+		right: calc(~"100% - 30px");
+		border-radius: 20px;
+		transition: all 0.3s ease-in 0s;
+		text-align: center;
+		line-height: 25px;
+		font-weight: 900;
+		font-size: 13px;
+		
+		&:before {
+			color: @color-error;
+			content: "\f00d";
+		}
+	}
+	
+	&--age {
+		.custom-switch__inner {
+			&:before {
+				content: "Ano, je"
+			}
+
+			&:after {
+				content: "Ne, není"
+			}
+		}
+	}
+}
+
+.custom-switch__checkbox:checked + .custom-switch__label .custom-switch__inner {
+    margin-left: 0;
+}
+.custom-switch__checkbox:checked + .custom-switch__label .custom-switch__switch {
+    right: 0px; 
+}
+
+.custom-switch__checkbox:checked + .custom-switch__label .custom-switch__switch:before {
+	color: @color-success;
+    content: "\f00c";
+}

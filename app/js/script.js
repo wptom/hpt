@@ -73,4 +73,33 @@ let customDropdown = function() {
     document.addEventListener("click", closeAllSelect);
 }
 
+let accordion = function () {
+    let acc = $(".accordion");
+
+    if (!acc) return false;
+
+    $(".accordion__question").removeClass("accordion__question--opened");
+    $(".accordion__answer").hide();
+
+    $(".accordion__question").click(function () {
+        $(".accordion__question").removeClass("accordion__question--opened");
+        $(".accordion__answer").hide();
+        $(this).addClass("accordion__question--opened");
+        $(this).next().show();
+    });
+}
+
+let showCode = function () {
+    
+    let showCodeButton = $(".show-code");
+    $(showCodeButton).next().hide();
+    
+    $(showCodeButton).click(function(e) {
+        e.preventDefault();
+        $(this).next().toggle();
+    });
+}
+
+accordion();
 customDropdown();
+showCode();

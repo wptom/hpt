@@ -20,6 +20,13 @@ gulp.task('less', done => {
         done();
 });
 
+gulp.task('vendor', done => {
+    gulp.src('vendor/**')
+        .pipe(gulp.dest('output'))
+
+        done()
+});
+
 gulp.task('js', done => {
     gulp.src('app/**/*.js')
         .pipe(gulp.dest('output'))
@@ -29,6 +36,13 @@ gulp.task('js', done => {
 
 gulp.task('html', done => {
     gulp.src('app/**/*.html')
+        .pipe(gulp.dest('output'))
+
+        done()
+});
+
+gulp.task('images', done => {
+    gulp.src('app/**/*.{gif,jpg,png,svg}')
         .pipe(gulp.dest('output'))
 
         done()
@@ -45,13 +59,17 @@ gulp.task('watch', function () {
     // gulp.watch('app/pages/**/*.html', gulp.series('nunjucks'));
     // gulp.watch('app/templates/**/*.html', gulp.series('nunjucks'));
     gulp.watch('app/*.html', gulp.series('html'));
+    gulp.watch('vendor', gulp.series('vendor'));
+    gulp.watch('app/**/*.{gif,jpg,png,svg}', gulp.series('images'));
     gulp.watch('app/less/**/*.less', gulp.series('less'));
     gulp.watch('app/js/**/*.js', gulp.series('js'));
 });
 
 gulp.task('default', gulp.parallel(
+    'vendor',
     'less',
     'js',
     'html',
+    'images',
     // 'nunjucks'
 ));

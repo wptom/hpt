@@ -1,0 +1,30 @@
+@import "colors.less";
+
+// Modal window
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: fade(@color-black, 20%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99;
+    display: none;
+
+    &__box {
+        position: relative;
+        width: 40%;
+        height: auto;
+        background-color: @color-white;
+    }
+
+    .close-icon {
+        position: absolute;
+        top: 20px;
+        right: 60px;
+        z-index: 1;
+    }
+}

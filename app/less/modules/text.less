@@ -1,0 +1,59 @@
+@import "colors.less";
+
+h1 {
+    font-size: 24px;
+    font-weight: 100;
+}
+
+h2 {
+    font-size: 24px;
+    font-weight: 100;
+}
+
+h3 {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+h4 {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.lead {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 100;
+}
+
+.link {
+    color: @color-primary;
+    text-decoration: none;
+
+    &:hover,
+    &:active {
+        text-decoration: underline;
+    }
+}
+
+.text-with-chevron {
+    line-height: 1;
+
+    .ico-chevron {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    &--on-left {
+        .ico-chevron {
+            margin-right: 5px;
+        }
+    }
+
+    &--on-right {
+        .ico-chevron {
+            margin-left: 5px;
+        }
+    }
+}

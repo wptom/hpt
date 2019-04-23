@@ -1,0 +1,53 @@
+@import "colors.less";
+@import "variables.less";
+
+.btn {
+    padding-top: 10px;
+    padding-right: 15px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: transparent;
+    border-radius: @btn-border-radius;
+    font-size: @btn-font-size;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+
+    &--primary {
+        background-color: @color-primary;
+        color: @color-white;
+
+        &:hover {
+            background-color: transparent;
+            color: @color-primary;
+        }
+    }
+
+    &--inverted {
+        background-color: transparent;
+        color: @color-primary;
+
+        &:hover {
+            background-color: @color-primary;
+            color: @color-white;
+        }
+    }
+
+    &--secondary {
+        background-color: @color-black;
+        color: @color-white;
+
+        &:hover {
+            background-color: @color-white;
+            color: @color-black;
+        }
+    }
+
+    &--border-red {
+        border-color: @color-error;
+        background-color: @color-white;
+        color: @color-error;
+    }
+}

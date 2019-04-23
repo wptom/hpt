@@ -1,0 +1,86 @@
+@import "colors.less";
+
+// Tooltips
+.tooltip {
+    position: relative;
+    display: inline-block;
+
+    &__link {
+        position: relative;
+    }
+
+    &__text {
+        visibility: hidden;
+        width: 300px;
+        max-width: 300px;
+        background-color: @color-white;
+        color: @color-text;
+        text-align: left;
+        padding: 15px 20px;
+        position: absolute;
+        z-index: 1;
+      }
+      
+    &:hover,
+    &--clicked {
+        .tooltip__link {
+            // z-index: 1;
+        }
+
+        .tooltip__text {
+            visibility: visible;
+            z-index: 1;
+        }
+    }
+
+    &--right {
+        .tooltip__text {
+            top: 105%;
+            left: -30%;
+        }
+    }
+
+    &--left {
+        .tooltip__text {
+            top: 105%;
+            right: -30%;
+        }
+    }
+
+    &--top {
+        .tooltip__text {
+            width: 120px;
+            bottom: 100%;
+            left: 50%; 
+            margin-left: -60px;
+        }
+    }
+
+    &--bottom {
+        .tooltip__text {
+            width: 120px;
+            top: 100%;
+            left: 50%; 
+            margin-left: -60px;
+        }
+    }
+
+    &--dropdown {
+        position: relative;
+        z-index: 1;
+        
+        &:hover,
+        &.tooltip--clicked {
+            .tooltip__link {
+                z-index: 1;
+            }
+            .tooltip__text {
+                z-index: 0;
+                width: 150%;
+                left: -30%;
+                top: -40%;
+                padding-top: 45%;
+            }
+        }
+    }
+}

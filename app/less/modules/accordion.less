@@ -1,0 +1,45 @@
+@import "colors.less";
+
+// Accordion
+.accordion {
+    &__question,
+    &__answer {
+        padding-left: 15px;
+    }
+    &__question {
+        position: relative;
+        color: @color-primary;
+
+        &__icon {
+            width: 10px;
+            height: 10px;
+        }
+
+        &__icon:before, 
+        &__icon:after {
+            position: absolute;
+            top: 5px;
+            left: 0;
+            content: ' ';
+            height: 10px;
+            width: 3px;
+            background-color: @color-primary;
+        }
+        &__icon:before {
+            transform: rotate(0deg);
+        }
+        &__icon:after {
+            transform: rotate(90deg);
+        }
+
+        &--opened {
+            .accordion__question__icon:before {
+                transform: rotate(45deg);
+            }
+        
+            .accordion__question__icon:after {
+                transform: rotate(135deg);
+            }
+        }
+    }
+}

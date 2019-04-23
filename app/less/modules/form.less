@@ -1,0 +1,290 @@
+@import "colors.less";
+@import "variables.less";
+
+.form {
+    &__label {
+        font-size: 14px;
+
+        &__info {
+            font-style: italic;
+            font-weight: 100;
+        }
+
+        &__asterisk {
+            color: @color-black;
+        }
+    }
+
+    &__input-text {
+        width: 100%;
+        margin-bottom: 20px;
+        padding-right: 10px;
+        padding-left: 10px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: @color-gray;
+        border-radius: @input-border-radius;
+        font-size: @body-font-size;
+        line-height: 34px;
+
+        &--success {
+            border-color: @color-success;
+        }
+
+        &--error {
+            border-color: @color-error;
+        }
+
+        &--warning {
+            border-color: @color-warning;
+        }
+    }
+
+    &__input-with-icon {
+        position: relative;
+
+        .form__input-text {
+            padding-right: 30px;
+        }
+
+        .fa, .fas, .far {
+            position: absolute;
+            top: 10px;
+            right: 9px;
+            font-size: 16px;
+            color: @color-gray;
+        }
+
+        &--success {
+            border-color: @color-success;
+
+            .fa, .fas, .far {
+                color: @color-success;
+            }
+        }
+
+        &--error {
+            border-color: @color-error;
+
+            .fa, .fas, .far {
+                color: @color-error;
+            }
+        }
+
+        &--warning {
+            border-color: @color-warning;
+
+            .fa, .fas, .far {
+                color: @color-warning;
+            }
+        }
+    }
+
+    &__input-desc {
+        display: inline-block;
+        line-height: 16px;
+    }
+
+    &__textarea {
+        margin-bottom: 20px;
+        padding-top: 10px;
+        padding-right: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        line-height: 1;
+        border: 1px solid @color-gray;
+        border-radius: @input-border-radius;
+        font-size: @body-font-size;
+
+        &--success {
+            border-color: @color-success;
+
+            .fa, .fas, .far {
+                color: @color-success;
+            }
+        }
+
+        &--error {
+            border-color: @color-error;
+
+            .fa, .fas, .far {
+                color: @color-error;
+            }
+        }
+
+        &--warning {
+            border-color: @color-warning;
+
+            .fa, .fas, .far {
+                color: @color-warning;
+            }
+        }
+    }
+
+    .form__textarea-with-icon {
+        position: relative;
+        display: inline-block;
+
+        .form__input-text {
+            padding-right: 30px;
+        }
+
+        .fa, .fas, .far {
+            position: absolute;
+            top: 40%;
+            right: 9px;
+            font-size: 16px;
+            color: @color-gray;
+        }
+    }
+
+    // checkbox
+    /* The container */
+    &__input-checkbox {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        user-select: none;
+        cursor: pointer;
+
+        /* Hide the browser's default checkbox */
+        &__checkbox {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+
+            /* On mouse-over, add a grey background color */
+            &:hover {
+                &__checkbox ~ &__input-checkbox__checkmark {
+                    background-color: transparent;
+                }
+            }
+            
+            /* When the checkbox is checked, add a blue background */
+            &:checked ~ &__input-checkbox__checkmark {
+                background-color: transparent;
+            }
+        }
+
+        /* Create a custom checkbox */
+        &__checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 20px;
+            width: 20px;
+            background-color: transparent;
+            border: 1px solid @color-gray;
+
+            /* Create the checkmark/indicator (hidden when not checked) */
+            &:after {
+                content: "";
+                position: absolute;
+                display: none;
+            }
+        }  
+    }
+    
+    /* Show the checkmark when checked */
+    &__input-checkbox &__input-checkbox__checkbox:checked ~ &__input-checkbox__checkmark:after {
+    display: block;
+    }
+    
+    /* Style the checkmark/indicator */
+    &__input-checkbox {
+        &__checkmark:after {
+            left: 6px;
+            top: 2px;
+            width: 7px;
+            height: 12px;
+            border: solid @color-success;
+            border-width: 0 3px 3px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+
+        &--red {
+            .form__input-checkbox__checkmark:after {
+                border: solid @color-primary;
+                border-width: 0 3px 3px 0;
+            }
+        }
+
+        &--black {
+            .form__input-checkbox__checkmark:after {
+                border: solid @color-black;
+                border-width: 0 3px 3px 0;
+            }
+        }
+    }
+
+    // radio buttons
+    /* The container */
+    &__input-radio {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    
+    /* Hide the browser's default radio button */
+    &__input-radio &__input-radio__checkbox {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+    
+    /* Create a custom radio button */
+    &__input-radio__checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: @color-white;
+        border: 1px solid @color-gray;
+        border-radius: 50%;
+    }
+    
+    /* On mouse-over, add a grey background color */
+    &__input-radio:hover &__input-radio__checkbox ~ &__input-radio__checkmark {
+        background-color: @color-gray;
+    }
+    
+    /* When the radio button is checked, add a blue background */
+    &__input-radio &__input-radio__checkbox:checked ~ &__input-radio__checkmark {
+        background-color: @color-white;
+    }
+    
+    /* Create the indicator (the dot/checkbox - hidden when not checked) */
+    &__input-radio__checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+    
+    /* Show the indicator (dot/checkbox) when checked */
+    &__input-radio &__input-radio__checkbox:checked ~ &__input-radio__checkmark:after {
+        display: block;
+    }
+    
+    /* Style the indicator (dot/checkbox) */
+    &__input-radio &__input-radio__checkmark:after {
+        top: 4px;
+        left: 4px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: @color-primary;
+    }
+}
