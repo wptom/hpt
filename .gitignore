@@ -2,7 +2,6 @@
 .vscode/
 node_modules
 styles.css
-/app/*.html
 /output*
 _ui/
 medias/
