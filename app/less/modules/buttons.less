@@ -51,10 +51,12 @@
         color: @color-error;
     }
 
-    &--small {
-        padding-top: 5px;
-        padding-right: 10px;
-        padding-bottom: 5px;
-        padding-left: 10px;
+    &--header-small {
+        @media (max-width: 767px) {
+            padding-top: 5px;
+            padding-right: 10px;
+            padding-bottom: 5px;
+            padding-left: 10px;
+        }
     }
 }
