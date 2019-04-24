@@ -1,0 +1,119 @@
+@import "colors.less";
+
+.header {
+    background-color: @color-white;
+    line-height: 1;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    &__menu {
+        display: none;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        padding-top: 80px;
+        background-color: fade(@color-white, 95%);
+        z-index: 1;
+
+        @media (min-width: 768px) {
+            display: block;
+            position: relative;
+            width: auto;
+            height: auto;
+            top: auto;
+            left: auto;
+            padding-top: 0;
+        }
+
+        &__item {
+            display: block;
+            width: 80%;
+            margin-right: auto;
+            margin-left: auto;
+            text-align: center;
+
+            @media (min-width: 768px) {
+                width: auto;
+                margin-right: 10px;
+                display: inline-block;
+                text-align: left;
+            }
+
+            @media (min-width: 992px) {
+                margin-right: 40px;
+            }
+
+            &:last-child {
+                margin-right: auto;
+
+                @media (min-width: 768px) {
+                    margin-right: 0;
+                }
+            }
+
+            &__link {
+                color: @color-text;
+                font-size: 26px;
+                line-height: 50px;
+
+                @media (min-width: 768px) {
+                    font-size: 16px;
+                    line-height: 1;
+                }
+
+                &--active {
+                    color: @color-black;
+                    font-weight: bold;
+                }
+            }
+
+            &__name {
+                margin-left: 5px;
+            }
+        }
+    }
+
+    // Toggle menu button ( hamburger )
+    &__toggler {
+        display: inline-block;
+        cursor: pointer;
+        position: relative;
+        z-index: 2;
+
+        @media (min-width: 768px) {
+            display: none;
+        }
+
+        &__bar {
+            width: 38px;
+            height: 3px;
+            background-color: @color-primary;
+            margin: 7px 0;
+            transition: 0.1s;
+            display: block;
+            position: relative;
+        }
+
+        &--active {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+
+            .header__toggler__bar--1 {
+                transform: rotate(-45deg) translate(-9px, 6px);
+                top: -2px;
+                left: 2px;
+            }
+
+            .header__toggler__bar--2 {
+                opacity: 0;
+            }
+
+            .header__toggler__bar--3 {
+                transform: rotate(45deg) translate(-8px, -8px);
+            }
+        }
+    }
+}

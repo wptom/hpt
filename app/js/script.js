@@ -89,6 +89,16 @@ let accordion = function () {
     });
 }
 
+let toggler = function () {
+    let toggler = $('.header__toggler');
+    if (!toggler) return false;
+
+    $(toggler).click(function () {
+        $(this).toggleClass('header__toggler--active');
+        $('.header__menu').toggle();
+    })
+}
+
 let showCode = function () {
     
     let showCodeButton = $(".show-code");
@@ -102,4 +112,5 @@ let showCode = function () {
 
 accordion();
 customDropdown();
+toggler();
 showCode();
