@@ -48,6 +48,17 @@ gulp.task('images', done => {
         done()
 });
 
+gulp.task('nunjucks', function() {
+    // Gets .html and .nunjucks files in pages
+    return gulp.src('app/pages/**/*.+(html|nunjucks)')
+        // Renders template with nunjucks
+        .pipe(nunjucksRender({
+            path: ['app/templates']
+        }))
+        // output files in app folder
+        .pipe(gulp.dest('app'))
+});
+
 gulp.task('watch', function () {
     browserSync.init({
         watch: true,
@@ -59,6 +70,8 @@ gulp.task('watch', function () {
     // gulp.watch('app/pages/**/*.html', gulp.series('nunjucks'));
     // gulp.watch('app/templates/**/*.html', gulp.series('nunjucks'));
     gulp.watch('app/*.html', gulp.series('html'));
+    gulp.watch('app/pages/*.+(html|nunjucks)', gulp.series('nunjucks'));
+    gulp.watch('app/templates/**/*.+(html|nunjucks)', gulp.series('nunjucks'));
     gulp.watch('vendor', gulp.series('vendor'));
     gulp.watch('app/**/*.{gif,jpg,png,svg}', gulp.series('images'));
     gulp.watch('app/less/**/*.less', gulp.series('less'));
