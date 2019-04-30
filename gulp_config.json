@@ -1,0 +1,13 @@
+[
+    {
+        "common_json": "./app/json/shared/common-data-cs.js",
+        "templates_folder": "./app/templates",
+        "dest_folder": "./output",
+        "pages": [{
+                "page": "./app/pages/001-hp-full.nunjucks",
+                "data": "./app/json/001-hp-full.js",
+                "output_name": "001-hp-full.html"
+            }
+        ]
+    }
+]

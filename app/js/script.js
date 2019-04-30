@@ -110,7 +110,18 @@ let showCode = function () {
     });
 }
 
+let tooltip = function () {
+    let tooltipLink = $(".tooltip");
+
+    $(tooltipLink).click(function(e) {
+        e.preventDefault();
+
+        $(this).toggleClass("tooltip--clicked");
+    });
+}
+
 accordion();
 customDropdown();
 toggler();
 showCode();
+// tooltip();

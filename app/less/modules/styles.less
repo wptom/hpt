@@ -27,6 +27,13 @@ body {
         margin-right: 0px;
         margin-left: 0px;
     }
+
+    &--box-inner {
+        @media (max-width: 575px) {
+            margin-right: -45px;
+            margin-left: -45px;
+        }
+    }
 }
 
 .line-top-border {
@@ -38,9 +45,176 @@ body {
 }
 
 .line-topline {
-    padding-bottom: 20px;
+    padding-bottom: 15px;
 }
 
 .line-bottomline {
     padding-bottom: 0;
+}
+
+// Orders
+.orders {
+    &__add-receipt {
+        margin-bottom: 20px;
+
+        @media (min-width: 768px) {
+            margin-bottom: 0;
+        }
+    }
+
+    &__id {
+        &__value {
+            color: @color-primary;
+            font-weight: 600;
+        }
+    }
+
+    &__price {
+        &__value {
+            font-weight: 600;
+        }
+    }
+
+    &__date {
+        &__value {
+            font-weight: 600;
+        }
+    }
+
+    &__storno-order {
+        color: @color-primary;
+    }
+
+    &__invoices {
+        color: @color-primary;
+    }
+
+    &__storno-order {
+        margin-left: 15px;
+
+        @media (min-width: 768px) {
+            display: inline-block;
+            margin-right: 20px;
+            margin-left: 0;
+        }
+    }
+
+    &__status {
+        margin-left: 15px;
+
+        @media (min-width: 768px) {
+            display: inline-block;
+            margin-left: 0;
+        }
+    }
+
+    // orders__listing
+    &__listing {
+        margin-bottom: 40px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        &__thumbnail {
+            float: left;
+            display: block;
+            width: 70px;
+            margin-right: 20px;
+
+            @media (min-width: 576px) {
+                width: 100px;
+                margin-right: 30px;
+            }
+        }
+
+        &__name {
+            display: inline-block;
+            padding-top: 20px;
+            color: @color-primary;
+            font-weight: 600;
+        }
+
+        &__price,
+        &__pieces {
+            display: block;
+            font-weight: 100;
+        }
+
+        &__add {
+            position: relative;
+            float: left;
+            top: 30px;
+            margin-left: 78px;
+            padding-left: 30px;
+            font-weight: 600;
+            color: @color-primary;
+
+            @media (min-width: 576px) {
+                margin-left: 128px;
+            }
+
+            @media (min-width: 1024px) {
+                top: 0;
+            }
+
+            .fas {
+                margin-right: 5px;
+                font-size: 13px;
+            }
+
+            .fas,
+            &__price {
+                color: @color-text;
+            }
+
+            &__price {
+                display: block;
+                margin-left: 20px;
+                font-weight: 100;
+            }
+
+            &__lines {
+                position: absolute;
+                top: -20px;
+                left: 5px;
+                width: 20px;
+                height: 30px;
+                border-bottom: 1px solid @color-gray;
+                border-left: 1px solid @color-gray;
+            }
+
+            &__order {
+                margin-top: 30px;
+
+                @media (min-width: 1024px) {
+                    margin-top: 0;
+                }
+            }
+
+            &--gift {
+                padding-top: 20px;
+
+                .orders__listing__add__lines {
+                    height: 64px;
+                    top: -32px;
+                }
+            }
+        }
+
+        &__infolinks {
+            margin-top: 20px;
+        }
+
+        &__infolink {
+            display: inline-block;
+            margin-left: 15px;
+            font-size: 13px;
+            color: @color-primary;
+
+            &__complaint-date {
+                color: @color-text;
+            }
+        }
+    }
 }

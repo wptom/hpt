@@ -2,8 +2,8 @@
     <div class="container container--mobile">
         <div class="row">
             <div class="col-3 col-sm-2 col-md-2 col-lg-2 d-flex align-items-center">
-                <a href="#" class="header__logo">
-                    <img src="images/logo.png" alt="">
+                <a href="{{COMMON.LOGO.link}}" class="header__logo">
+                    <img src="{{COMMON.LOGO.path}}" alt="{{COMMON.LOGO.alt}}">
                 </a>
             </div>
             <div class="col-2 col-sm-5 col-md-7 col-lg-7 d-flex align-items-center justify-content-end justify-content-md-start">
