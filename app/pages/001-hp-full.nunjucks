@@ -1,11 +1,127 @@
 <!-- 001-hp-full.nunjucks -->
 {% extends "layout.nunjucks" %}
 {% block content %}
+
+{% for items in PAGE.ORDERS %}
+    {{ items.sectionTitle }}<br>
+    {% for value in items.order %}
+    {{ value.id }}<br>
+        {% for item in value.orderItem %}
+        {{ item.name }}<br>
+        {{ item.price }}<br>
+        ---<br>
+        {% endfor %}
+    {% endfor %}
+    =====<br>
+{% endfor %}
+
+<div class="container orders">
+    {% for orders in PAGE.ORDERS %}
+    <div class="row">
+        <div class="orders__title col-md-6">
+            <h1>{{ orders.ordersStatus }}</h1>
+        </div>
+        {% if orders.addReceipt %}
+        <div class="orders__add-receipt col-md-6 text-left text-md-right d-md-flex justify-content-end align-items-center">
+            <span href="#" class="link"><i class="fas fa-plus-circle"></i>&nbsp;{{ orders.addReceipt }}</span>
+        </div>
+        {% endif %}
+    </div>
+
+    {% for item in orders.order %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="box box--white box--mb">
+                <div class="box__inner">
+                    <div class="row row--box-inner">
+                        <div class="col-12 col-xs-8 col-sm-6 col-md-5 col-lg-8 line-topline">
+                            <div class="row">
+                                <div class="col-lg-4 orders__id">{{ COMMON.TEXT.order }}&nbsp;<span class="orders__id__value">{{ item.id }}</span></div>
+                                <div class="col-lg-4 orders__price">{{ COMMON.TEXT.valued }}&nbsp;<span class="orders__price__value">{{ item.value }}</span></div>
+                                <div class="col-lg-4 orders__date">{{ COMMON.TEXT.date }}&nbsp;<span class="orders__date__value">{{ item.date }}</span></div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-xs-4 col-sm-6 col-md-7 col-lg-4 line-topline text-sm-right">
+                            <a href="#" class="orders__storno-order">{{ item.orderAction }}</a>
+                            <div class="orders__status">
+                                <div class="tooltip tooltip--left">
+                                    <span class="tooltip__link"><span class="text-color-{{ item.statusColor }}">{{ item.status }}</span>&nbsp;<span class="fa fa-question-circle text-color-{{ item.statusColor }}"></span></span>
+                                    <span class="tooltip__text">{{ item.statusText }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+
+                            <div class="line-top-border">
+                                {% for value in item.orderItem %}
+                                <div class="row orders__listing">
+
+                                    <div class="col-12 col-lg-6">
+                                        <div class="orders__listing__thumbnail">
+                                            <a href="{{ value.productURL }}">
+                                                <img src="{{ value.imgURL }}" alt="{{ value.name }}">
+                                            </a>
+                                        </div>
+                                        <div class="orders__listing__wrap-info">
+                                            <a href="#" class="orders__listing__name">{{ value.name }}</a>
+                                            <span class="orders__listing__price">{{ value.price }}</span>
+                                            <span class="orders__listing__pieces">{{ value.items }}</span>
+                                        </div>
+                                    </div>
+
+                                    {# <div class="col-12 col-lg-6 orders__listing__infolinks text-right">
+                                        <div class="orders__listing__infolink tooltip tooltip--dropdown">
+                                            <span class="tooltip__link">Dokumenty&nbsp;<span class="fa fa-fa fa-caret-down"></span></span>
+                                            <span class="tooltip__text text-align-right"><ul><li><a href="#" class="link">Návod k obsluze</a></li><li><a href="#" class="link">Záruční list</a></li></ul></span>
+                                        </div>
+                                        <a href="#" class="orders__listing__infolink">Ohodnotit</a>
+                                        <span class="orders__listing__infolink"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+                                        <a href="#" class="orders__listing__infolink">Reklamovat <span class="orders__listing__infolink__complaint-date">(do&nbsp;10.12.2019)</span></a>
+                                    </div> #}
+
+                                    {% for addService in value.add %}
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                
+                                                <div class="orders__listing__add {% if (addService.firstInLine===false) %}orders__listing__add--next-service{% endif %}">
+                                                <span class="orders__listing__add__lines"></span>
+                                                    {% if (addService.type==="warranty") %}
+                                                    <i class="fas fa-wrench"></i>
+                                                    {% elif (addService.type==="gift") %}
+                                                    <i class="fas fa-gift"></i>
+                                                    {% endif %}
+                                                    {{ addService.text }}
+                                                    <span class="orders__listing__add__price">{{ addService.price }}</span>
+                                                </div>
+                                            </div>
+                                            {% if (addService.addThisService) %}
+                                            <div class="col-md-4 text-right">
+                                                <a class="orders__listing__infolink orders__listing__add__order">{{ addService.addThisService }}</a>
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    {% endfor %}
+</div>
+
 <div class="container orders">
     {# Aktivni objednavky #}
     <div class="row">
         <div class="orders__title col-md-6">
-            <h1>Aktivní objednávky</h1>
+            <h1>Aktivní objednávky </h1>
         </div>
         <div class="orders__add-receipt col-md-6 text-left text-md-right d-md-flex justify-content-end align-items-center">
             <a href="#" class="link"><i class="fas fa-plus-circle"></i>&nbsp;Přidat účtenku z obchodu</a>

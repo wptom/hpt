@@ -7,6 +7,7 @@ const rename = require('gulp-rename');
 const nunjucksRender = require('gulp-nunjucks-render');
 const data = require('gulp-data');
 const fs = require('fs');
+const del = require('del');
 
 gulp.task('less', done => {
     gulp.src(['app/less/**/*.less',
@@ -35,6 +36,12 @@ gulp.task('js', done => {
         done()
 });
 
+gulp.task('clean-html', function () {
+    return del([
+        'output/*.html'
+    ]);
+});
+
 gulp.task('html', done => {
     gulp.src('app/**/*.html')
         .pipe(gulp.dest('output'))
@@ -61,6 +68,7 @@ gulp.task('nunjucks', function() {
 });
 
 gulp.task('readJSON', done => {
+
     const global_config = JSON.parse(fs.readFileSync('./gulp_config.json'));
     for (site of global_config) {
         processSite(site);
@@ -80,11 +88,12 @@ function processSite(siteData) {
     for (page of siteData.pages) {
         createPage(page, siteData.templates_folder, siteData.common_json, siteData.dest_folder);
     }
-    //console.log('process site done');
+    
 }
 
 function createPage(pageData, templatesSource, commonJson, outputDirectory) {
     //console.log('create pages');
+
     return gulp.src(pageData.page)
         .pipe(getData(pageData.data, commonJson))
         .pipe(nunjucksRender({
@@ -97,7 +106,8 @@ function createPage(pageData, templatesSource, commonJson, outputDirectory) {
 function getData(pageFile, commonFile) {
     const pageData = require(pageFile);    
     const commonData = require(commonFile);
-    //console.log(commonData.LOGO.path);
+    // console.log(pageData.ORDERS.sectionTitle);
+    
     //const sharedProjects = require('./app/json/shared/project-info.js')
     return data({
         PAGE: pageData,
@@ -113,10 +123,10 @@ gulp.task('watch', function () {
             baseDir: 'output'
         }
     });
-    gulp.watch('app/*.html', gulp.series(['html']));
-    gulp.watch('app/json/**/*.+(js|json)', gulp.series(['readJSON', 'nunjucks']));
-    gulp.watch('app/pages/*.+(html|nunjucks)', gulp.series(['readJSON', 'nunjucks']));
-    gulp.watch('app/templates/**/*.+(html|nunjucks)', gulp.series(['readJSON', 'nunjucks']));
+    // gulp.watch('app/*.html', gulp.series(['html']));
+    gulp.watch('app/json/**/*.+(js|json)', gulp.series(['clean-html', 'readJSON', 'nunjucks']));
+    gulp.watch('app/pages/*.+(html|nunjucks)', gulp.task(['clean-html', 'readJSON', 'nunjucks']));
+    gulp.watch('app/templates/**/*.+(html|nunjucks)', gulp.series(['clean-html', 'readJSON', 'nunjucks']));
     gulp.watch('vendor', gulp.series('vendor'));
     gulp.watch('app/**/*.{gif,jpg,png,svg}', gulp.series('images'));
     gulp.watch('app/less/**/*.less', gulp.series('less'));
@@ -124,11 +134,12 @@ gulp.task('watch', function () {
 });
 
 gulp.task('default', gulp.parallel(
-    'readJSON',
     'vendor',
     'less',
     'js',
-    'html',
     'images',
-    // 'nunjucks'
+    'clean-html',
+    'readJSON',
+    'nunjucks',
+    // 'html'
 ));
