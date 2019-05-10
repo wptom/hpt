@@ -61,7 +61,7 @@ gulp.task('nunjucks', function() {
     return gulp.src('app/pages/**/*.+(html|nunjucks)')
         // Renders template with nunjucks
         .pipe(nunjucksRender({
-            path: ['app/templates']
+            path: ['app/templates/']
         }))
         // output files in app folder
         .pipe(gulp.dest('app'))
@@ -78,12 +78,6 @@ gulp.task('readJSON', done => {
 });
 
 function processSite(siteData) {
-    // console.log('process site - ',siteData.dest_folder);
-    // migrateImages(siteData.images_transfer, siteData.dest_folder);
-    // migrateJS(siteData.js_transfer, siteData.dest_folder);
-    // migrateCSS(siteData.css_transfer, siteData.dest_folder);
-    // migrateFonts(siteData.fonts_transfer, siteData.dest_folder);
-    // createCSS(siteData.less_source, siteData.color_module, siteData.dest_folder);
 
     for (page of siteData.pages) {
         createPage(page, siteData.templates_folder, siteData.common_json, siteData.dest_folder);
@@ -92,7 +86,6 @@ function processSite(siteData) {
 }
 
 function createPage(pageData, templatesSource, commonJson, outputDirectory) {
-    //console.log('create pages');
 
     return gulp.src(pageData.page)
         .pipe(getData(pageData.data, commonJson))
@@ -106,12 +99,9 @@ function createPage(pageData, templatesSource, commonJson, outputDirectory) {
 function getData(pageFile, commonFile) {
     const pageData = require(pageFile);    
     const commonData = require(commonFile);
-    // console.log(pageData.ORDERS.sectionTitle);
     
-    //const sharedProjects = require('./app/json/shared/project-info.js')
     return data({
         PAGE: pageData,
-        // PROJECT_SHARED: sharedProjects,
         COMMON: commonData
     });
 }
@@ -123,10 +113,11 @@ gulp.task('watch', function () {
             baseDir: 'output'
         }
     });
+
     // gulp.watch('app/*.html', gulp.series(['html']));
-    gulp.watch('app/json/**/*.+(js|json)', gulp.series(['clean-html', 'readJSON', 'nunjucks']));
-    gulp.watch('app/pages/*.+(html|nunjucks)', gulp.task(['clean-html', 'readJSON', 'nunjucks']));
-    gulp.watch('app/templates/**/*.+(html|nunjucks)', gulp.series(['clean-html', 'readJSON', 'nunjucks']));
+    gulp.watch('app/json/*.+(js|json)', gulp.series(['default']));
+    gulp.watch('app/pages/**/*.nunjucks', gulp.task(['clean-html', 'readJSON', 'nunjucks']));
+    gulp.watch('app/templates/**/*.nunjucks', gulp.series(['clean-html', 'readJSON', 'nunjucks']));
     gulp.watch('vendor', gulp.series('vendor'));
     gulp.watch('app/**/*.{gif,jpg,png,svg}', gulp.series('images'));
     gulp.watch('app/less/**/*.less', gulp.series('less'));

@@ -3,29 +3,6 @@
     <div class="footer__links">
         <div class="container">
             <div class="row">
-                {# <div class="col-md-3 pl-0">
-                    <h4 class="footer__links__title">Nejčastější dotazy</h4>
-                    <ul class="footer__links__list">
-                        <li>
-                            <a class="footer__links__link" href="#">Jaká je cena za dopravu?</a>
-                        </li>
-                        <li>
-                            <a class="footer__links__link" href="#">Co je doprava HDS Komfort?</a>
-                        </li>
-                        <li>
-                            <a class="footer__links__link" href="#">Doprava zdarma</a>
-                        </li>
-                        <li>
-                            <a class="footer__links__link" href="#">Kde si můžu zboží vyzvednout osobně?</a>
-                        </li>
-                        <li>
-                            <a class="footer__links__link" href="#">Máte otevřeno i o víkendu?</a>
-                        </li>
-                        <li>
-                            <a class="footer__links__link" href="#">Můžu u vás platit kartou?</a>
-                        </li>
-                    </ul>
-                </div> #}
 
                 {% for column in COMMON.FOOTERCOLS %}
                 <div class="{{ column.bootstrapCols }} pl-0">

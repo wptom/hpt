@@ -1,4 +1,0 @@
-<!-- header-footer.nunjucks -->
-{% extends "layout.nunjucks" %}
-{% block content %}
-{% endblock %}

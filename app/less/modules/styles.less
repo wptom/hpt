@@ -8,6 +8,7 @@ body {
     font-size: @body-font-size;
     line-height: @body-line-height;
     font-family: @font-open-sans;
+    font-weight: 100;
 }
 
 .container {
@@ -54,7 +55,15 @@ body {
 
 // Orders
 .orders {
+    &__title {
+        margin-top: 15px;
+    }
+
     &__add-receipt {
+        @media (min-width: 768px) {
+            margin-top: 15px;
+        }
+        
         margin-bottom: 20px;
 
         @media (min-width: 768px) {
@@ -81,7 +90,7 @@ body {
         }
     }
 
-    &__storno-order {
+    &__order-action {
         color: @color-primary;
     }
 
@@ -89,7 +98,7 @@ body {
         color: @color-primary;
     }
 
-    &__storno-order {
+    &__order-action {
         margin-left: 15px;
 
         @media (min-width: 768px) {
@@ -196,6 +205,11 @@ body {
                 }
             }
 
+            &__info {
+                font-weight: 100;
+                color: @color-text;
+            }
+
             &--next-service {
                 padding-top: 20px;
 
@@ -218,6 +232,15 @@ body {
 
             &__complaint-date {
                 color: @color-text;
+            }
+
+            &--rating {
+                font-size: 11px;
+            }
+
+            &--cancel {
+                color: @color-black;
+                font-weight: 400;
             }
         }
     }

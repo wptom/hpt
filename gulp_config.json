@@ -7,6 +7,10 @@
                 "page": "./app/pages/001-hp-full.nunjucks",
                 "data": "./app/json/001-hp-full.js",
                 "output_name": "001-hp-full.html"
+            },{
+                "page": "./app/pages/002-hp-bezaktivnich.nunjucks",
+                "data": "./app/json/002-hp-bezaktivnich.js",
+                "output_name": "002-hp-bezaktivnich.html"
             }
         ]
     }

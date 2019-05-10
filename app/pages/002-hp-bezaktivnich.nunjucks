@@ -1,4 +1,4 @@
-<!-- 001-hp-full.nunjucks -->
+<!-- 002-hp-bezaktivnich.nunjucks -->
 {% extends "layout.nunjucks" %}
 {% block content %}
 

@@ -150,9 +150,10 @@ module.exports = {
         order: "OBJEDNÁVKA:",
         valued: "V HODNOTĚ:",
         date: "ZE DNE",
-        completing: "VYŘIZUJEME",
-        ready: "PŘIPRAVENO",
-        cancelled: "ZRUŠENO",
-        completed: "VYŘÍZENO"
+        licenceKeyShow: "Zobrazit licenční klíč",
+        licenceKeyHide: "Skrýt licenční klíč",
+        rate: "Ohodnotit",
+        claim: "Reklamovat",
+        returned: "Vráceno"
     }
 }

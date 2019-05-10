@@ -1,0 +1,157 @@
+<div class="container orders">
+    {% for orders in PAGE.ORDERS %}
+    <div class="row">
+        <div class="orders__title col-md-6">
+            <h1>{{ orders.ordersStatus }}</h1>
+        </div>
+        {% if orders.addReceipt %}
+        <div class="orders__add-receipt col-md-6 text-left text-md-right d-md-flex justify-content-end align-items-center">
+            <span href="#" class="link"><i class="fas fa-plus-circle"></i>&nbsp;{{ orders.addReceipt }}</span>
+        </div>
+        {% endif %}
+    </div>
+
+    {% if (orders.order) %}
+    {% for item in orders.order %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="box box--white box--mb">
+                <div class="box__inner">
+                    <div class="row row--box-inner">
+                        <div class="col-12 col-xs-8 col-sm-6 col-md-5 col-lg-8 line-topline">
+                            <div class="row">
+                                <div class="col-lg-4 orders__id">{{ COMMON.TEXT.order }}&nbsp;<span class="orders__id__value">{{ item.id }}</span></div>
+                                <div class="col-lg-4 orders__price">{{ COMMON.TEXT.valued }}&nbsp;<span class="orders__price__value">{{ item.value }}</span></div>
+                                <div class="col-lg-4 orders__date">{{ COMMON.TEXT.date }}&nbsp;<span class="orders__date__value">{{ item.date }}</span></div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-xs-4 col-sm-6 col-md-7 col-lg-4 line-topline text-sm-right">
+                            {% if (item.orderActions) %}
+                            <div class="orders__order-action tooltip tooltip--dropdown">
+                                <span class="tooltip__link">{{ item.orderActions }}&nbsp;<span class="fa fa-fa fa-caret-down"></span></span>
+                                <span class="tooltip__text text-align-right"><ul>
+                                    {% for value in item.orderActionLinks %}
+                                    <li><a href="{{ value.href }}" class="link">{{ value.name }}</a></li>
+                                    {% endfor %}
+                                </ul></span>
+                            </div>
+                            {% elif (item.orderAction) %}
+                            <a href="#" class="orders__order-action">{{ item.orderAction }}</a>
+                            {% endif %}
+                            <div class="orders__status">
+                                <div class="tooltip tooltip--left">
+                                    <span class="tooltip__link"><span class="text-color-{{ item.statusColor }}">{{ item.status }}</span>&nbsp;<span class="fa fa-question-circle text-color-{{ item.statusColor }}"></span></span>
+                                    <span class="tooltip__text">{{ item.statusText }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+
+                            <div class="line-top-border">
+                                {% for value in item.orderItem %}
+                                <div class="row orders__listing">
+
+                                    <div class="col-12 col-lg-6">
+                                        <div class="orders__listing__thumbnail">
+                                            <a href="{{ value.productURL }}">
+                                                <img src="{{ value.imgURL }}" alt="{{ value.name }}">
+                                            </a>
+                                        </div>
+                                        <div class="orders__listing__wrap-info">
+                                            <a href="#" class="orders__listing__name">{{ value.name }}</a>
+                                            <span class="orders__listing__price">{{ value.price }}</span>
+                                            <span class="orders__listing__pieces">{{ value.items }}</span>
+                                        </div>
+                                    </div>
+
+                                    {% if (item.status==="VYŘÍZENO") %}
+                                    <div class="col-12 col-lg-6 orders__listing__infolinks text-right">
+                                        {% if (item.documentsText==="Stáhnout fakturu") %}
+                                        <a href="#" class="orders__listing__infolink">{{ item.invoicesText }}</a>
+                                        {% elif (item.documentsText==="Stáhnout faktury") %}
+                                        <div class="orders__listing__infolink tooltip tooltip--dropdown">
+                                            <span class="tooltip__link">{{ item.documentsText }}&nbsp;<span class="fa fa-fa fa-caret-down"></span></span>
+                                            <span class="tooltip__text text-align-right"><ul>
+                                                {% for invoices in value %}
+                                                <li><a href="#" class="link">{{ invoices.name }}</a></li>
+                                                {% endfor %}
+                                            </ul></span>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                        
+                                    {% if (value.documentActionLinks) %}
+                                    <div class="orders__listing__infolink tooltip tooltip--dropdown">
+                                        <span class="tooltip__link">{{ value.documentAction }}&nbsp;<span class="fa fa-fa fa-caret-down"></span></span>
+                                        <span class="tooltip__text text-align-right"><ul>
+                                            {% for links in value.documentActionLinks %}
+                                            <li><a href="#" class="link">{{ links.name }}</a></li>
+                                            {% endfor %}
+                                        </ul></span>
+                                    </div>
+                                    {% endif %}
+                                        
+
+                                        {% if (value.rating>0) %}
+                                        <span class="orders__listing__infolink orders__listing__infolink--rating">
+                                            {% for i in range(value.rating) %}
+                                            <i class="fas fa-star"></i>
+                                            {% endfor %}
+                                        </span>
+                                        {% else %}
+                                        <a href="#" class="orders__listing__infolink">Ohodnotit</a>
+                                        {% endif %}
+
+                                        {% if (value.claimDate) %}
+                                        <a href="#" class="orders__listing__infolink">{{COMMON.TEXT.claim}} <span class="orders__listing__infolink__complaint-date">{{ value.claimDate }}</span></a>
+                                        {% elif (value.returnDate) %}
+                                        <span href="#" class="orders__listing__infolink orders__listing__infolink--cancel">{{COMMON.TEXT.returned}} <span class="orders__listing__infolink__complaint-date">{{ value.returnDate }}</span></span>
+                                        {% endif %}
+
+                                    </div>
+                                    {% endif %}
+
+                                    {% for addService in value.add %}
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                
+                                                <div class="orders__listing__add {% if (addService.firstInLine===false) %}orders__listing__add--next-service{% endif %}">
+                                                <span class="orders__listing__add__lines"></span>
+                                                    {% if (addService.type==="warranty") %}
+                                                    <i class="fas fa-wrench"></i>
+                                                    {% elif (addService.type==="gift") %}
+                                                    <i class="fas fa-gift"></i>
+                                                    {% endif %}
+                                                    {{ addService.text }}&nbsp;<span class="orders__listing__add__info">{{ addService.info }}</span>
+                                                    <span class="orders__listing__add__price">{{ addService.price }}</span>
+                                                </div>
+                                            </div>
+                                            {% if (addService.addThisService) %}
+                                            <div class="col-md-4 text-right">
+                                                <a class="orders__listing__infolink orders__listing__add__order">{{ addService.addThisService }}</a>
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <div class="box box--alert box--light-gray">
+        <div class="box__inner">
+            {{ orders.alert | safe }} 
+        </div>
+    </div>
+    {% endif %}
+
+    {% endfor %}
+</div>
